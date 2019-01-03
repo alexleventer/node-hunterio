@@ -1,5 +1,3 @@
-import Hunterio from './Hunterio';
-
 export {
   AccountInformationResponse,
   DomainSearchResponse,
@@ -11,6 +9,5 @@ export {
   EmailCountCompanyRequest,
   EmailCountRequest,
   EmailCountResponse,
+  Hunterio,
 } from './Hunterio';
-
-export default Hunterio;

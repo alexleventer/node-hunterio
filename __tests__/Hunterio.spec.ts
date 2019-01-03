@@ -1,11 +1,13 @@
 import { describe, it } from 'mocha';
-import { assert, expect } from 'chai';
-import Hunterio, {EmailCountRequest, EmailCountResponse, FindEmailRequest} from '../src/Hunterio';
+import { expect } from 'chai';
+import { Hunterio, EmailCountRequest, EmailCountResponse, FindEmailRequest } from '../src';
 
 describe('Hunterio', () => {
-  const { API_KEY } = process.env;
+  // @ts-ignore
+  const { API_KEY } = process.env.API_KEY;
   describe('Constructor', async () => {
     it('should throw if api key is not provided', async () => {
+      // @ts-ignore
       const token = 'abcd';
       expect(() => {
         // @ts-ignore
@@ -51,7 +53,7 @@ describe('Hunterio', () => {
   describe('Email Finder', () => {
     it('should search domain', async () => {
       const hunterio = new Hunterio(API_KEY);
-      const findEmailRequest:FindEmailRequest = {
+      const findEmailRequest: FindEmailRequest = {
         domain: 'gradle.com',
         company: 'Gradle',
         first_name: 'Alex',
@@ -74,7 +76,7 @@ describe('Hunterio', () => {
   describe('Email Count', () => {
     it('should get email count', async () => {
       const hunterio = new Hunterio(API_KEY);
-      const emailCountRequest:EmailCountRequest = {
+      const emailCountRequest: EmailCountRequest = {
         domain: 'hunter.io',
       };
       const results:EmailCountResponse = await hunterio.getEmailCount(emailCountRequest);

@@ -1,10 +1,10 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-class Hunterio {
-  private readonly apiKey:string;
-  private readonly apiBase:string;
-  private axios:AxiosInstance;
-  constructor(apiKey:string) {
+export class Hunterio {
+  private readonly apiKey: string;
+  private readonly apiBase: string;
+  private axios: AxiosInstance;
+  constructor(apiKey: string) {
     if (!apiKey) {
       throw new Error('API key is required');
     }
@@ -12,14 +12,14 @@ class Hunterio {
     this.apiKey = apiKey;
     this.axios = axios;
   }
-  private async makeRequest(url: string, body: any):Promise<AxiosResponse> {
+  private async makeRequest(url: string, body: any): Promise<AxiosResponse> {
     try {
       return await this.axios.get(url, body);
     } catch (error) {
       throw error;
     }
   }
-  async searchDomain(domain:string):Promise<DomainSearchResponse> {
+  async searchDomain(domain: string): Promise<DomainSearchResponse> {
     if (!domain) {
       throw new Error('Missing required parameter, domain');
     }
@@ -31,7 +31,7 @@ class Hunterio {
     });
     return results.data;
   }
-  async findEmail(emailRequest:FindEmailRequest):Promise<FindEmailResponse> {
+  async findEmail(emailRequest: FindEmailRequest): Promise<FindEmailResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-finder`, {
       params: Object.assign(emailRequest, {
         api_key: this.apiKey,
@@ -39,7 +39,7 @@ class Hunterio {
     });
     return results.data;
   }
-  async getEmailCount(emailCountRequest:EmailCountRequest):Promise<EmailCountResponse> {
+  async getEmailCount(emailCountRequest: EmailCountRequest): Promise<EmailCountResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-count`, {
       params: Object.assign(emailCountRequest, {
         api_key: this.apiKey,
@@ -47,7 +47,7 @@ class Hunterio {
     });
     return results.data;
   }
-  async getAccountInformation():Promise<AccountInformationResponse> {
+  async getAccountInformation(): Promise<AccountInformationResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/account`, {
       params: {
         api_key: this.apiKey,
@@ -56,8 +56,6 @@ class Hunterio {
     return results.data;
   }
 }
-
-export default Hunterio;
 
 export interface AccountInformationResponse {
   data: {
