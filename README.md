@@ -2,4 +2,4 @@
 
 ## Installation:
 Use npm to install the package:
-`$ npm install node-hunterio`
+```$ npm install node-hunterio```
