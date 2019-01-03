@@ -12,7 +12,7 @@ class Hunterio {
     this.apiKey = apiKey;
     this.axios = axios;
   }
-  async makeRequest(url: string, body: any):Promise<AxiosResponse> {
+  private async makeRequest(url: string, body: any):Promise<AxiosResponse> {
     try {
       return await this.axios.get(url, body);
     } catch (error) {
