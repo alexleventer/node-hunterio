@@ -1,0 +1,23 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2015",
+    "lib": [
+      "es2015"
+    ],
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "pretty": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "baseUrl": "."
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}
