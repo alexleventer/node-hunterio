@@ -12,8 +12,9 @@ export class Hunterio {
     this.apiKey = apiKey;
     this.axios = axios;
   }
-  private async makeRequest(url: string, body: any): Promise<AxiosResponse> {
+  private async makeRequest(url: string, body: any = { params: {} }): Promise<AxiosResponse> {
     try {
+      body.params.api_key = this.apiKey;
       return await this.axios.get(url, body);
     } catch (error) {
       throw error;
@@ -26,33 +27,24 @@ export class Hunterio {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/domain-search`, {
       params: {
         domain,
-        api_key: this.apiKey,
       },
     });
     return results.data;
   }
   async findEmail(emailRequest: FindEmailRequest): Promise<FindEmailResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-finder`, {
-      params: Object.assign(emailRequest, {
-        api_key: this.apiKey,
-      }),
+      params: emailRequest,
     });
     return results.data;
   }
   async getEmailCount(emailCountRequest: EmailCountRequest): Promise<EmailCountResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-count`, {
-      params: Object.assign(emailCountRequest, {
-        api_key: this.apiKey,
-      }),
+      params: emailCountRequest,
     });
     return results.data;
   }
   async getAccountInformation(): Promise<AccountInformationResponse> {
-    const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/account`, {
-      params: {
-        api_key: this.apiKey,
-      },
-    });
+    const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/account`);
     return results.data;
   }
 }

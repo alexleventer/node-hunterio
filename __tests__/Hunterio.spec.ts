@@ -4,7 +4,7 @@ import { Hunterio, EmailCountRequest, EmailCountResponse, FindEmailRequest } fro
 
 describe('Hunterio', () => {
   // @ts-ignore
-  const { API_KEY } = process.env.API_KEY;
+  const API_KEY: string = process.env.API_KEY;
   describe('Constructor', async () => {
     it('should throw if api key is not provided', async () => {
       // @ts-ignore
