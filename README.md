@@ -41,3 +41,20 @@ hunterio.findEmail(firstEmailRequest)
     console.log('Email Information: ' + res);
   });
 ```
+
+### Email Verification
+Check if a given email address is deliverable and has been found on the internet.
+
+```javascript
+const API_KEY = 'YOUR_API_KEY';
+const hunterio = new Hunterio(API_KEY);
+
+const emailVerificationRequest = {
+  email: 'alex@gmail.com'
+};
+
+hunterio.findEmail(emailVerificationRequest)
+  .then((res) => {
+    console.log('Email Verification Information: ' + res);
+  });
+```

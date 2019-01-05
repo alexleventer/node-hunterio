@@ -37,6 +37,12 @@ export class Hunterio {
     });
     return results.data;
   }
+  async verifyEmail(emailRequest: VerifyEmailRequest): Promise<VerifyEmailResponse> {
+    const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-verifier`, {
+      params: emailRequest,
+    });
+    return results.data;
+  }
   async getEmailCount(emailCountRequest: EmailCountRequest): Promise<EmailCountResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/email-count`, {
       params: emailCountRequest,
@@ -128,6 +134,33 @@ export interface FindEmailResponse {
       full_name: string;
       domain: string;
       company: string;
+    };
+  };
+}
+
+export interface VerifyEmailRequest {
+  email: string;
+}
+
+export interface VerifyEmailResponse {
+  data: {
+    result: string;
+    score: number;
+    email: string;
+    regexp: boolean;
+    gibberish: boolean;
+    disposable: boolean;
+    webmail: boolean;
+    mx_records: boolean;
+    smtp_server: boolean;
+    smtp_check: boolean;
+    accept_all: boolean;
+    block: boolean;
+    sources: EmailResultSource[];
+  };
+  meta: {
+    params: {
+      email: string;
     };
   };
 }

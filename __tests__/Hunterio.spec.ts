@@ -1,6 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { Hunterio, EmailCountRequest, EmailCountResponse, FindEmailRequest } from '../src';
+import {VerifyEmailRequest} from '../src/Hunterio';
 
 
 describe('Hunterio', () => {
@@ -55,8 +56,8 @@ describe('Hunterio', () => {
     it('should search domain', async () => {
       const hunterio = new Hunterio(API_KEY);
       const findEmailRequest: FindEmailRequest = {
-        domain: 'gradle.com',
-        company: 'Gradle',
+        domain: 'Hunter.io',
+        company: 'Hunter.io',
         first_name: 'Alex',
         last_name: 'Leventer',
         full_name: 'Alex Leventer',
@@ -73,7 +74,22 @@ describe('Hunterio', () => {
       expect(results.meta).to.have.property('params');
     });
   });
-
+  describe('Email Verification', () => {
+    it('should verify email', async () => {
+      const hunterio = new Hunterio(API_KEY);
+      const verifyEmailRequest: VerifyEmailRequest = {
+        email: 'alexleventer@gmail.com',
+      };
+      const results = await hunterio.verifyEmail(verifyEmailRequest);
+      expect(results).to.have.property('data');
+      expect(results.data).to.have.property('result');
+      expect(results.data).to.have.property('score');
+      expect(results.data).to.have.property('email');
+      expect(results.data).to.have.property('regexp');
+      expect(results.data).to.have.property('gibberish');
+      expect(results).to.have.property('meta');
+    });
+  });
   describe('Email Count', () => {
     it('should get email count', async () => {
       const hunterio = new Hunterio(API_KEY);
