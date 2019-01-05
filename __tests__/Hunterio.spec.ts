@@ -2,6 +2,7 @@ import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { Hunterio, EmailCountRequest, EmailCountResponse, FindEmailRequest } from '../src';
 
+
 describe('Hunterio', () => {
   // @ts-ignore
   const API_KEY: string = process.env.API_KEY;
