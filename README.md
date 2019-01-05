@@ -53,7 +53,7 @@ const emailVerificationRequest = {
   email: 'alex@gmail.com'
 };
 
-hunterio.findEmail(emailVerificationRequest)
+hunterio.verifyEmail(emailVerificationRequest)
   .then((res) => {
     console.log('Email Verification Information: ' + res);
   });
