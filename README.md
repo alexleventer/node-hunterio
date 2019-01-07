@@ -58,3 +58,29 @@ hunterio.verifyEmail(emailVerificationRequest)
     console.log('Email Verification Information: ' + res);
   });
 ```
+
+### Leads
+Save and manage all your leads in Hunter.
+
+```javascript
+const API_KEY = 'YOUR_API_KEY';
+const hunterio = new Hunterio(API_KEY);
+
+hunterio.listLeads()
+  .then((res) => {
+    console.log('Leads: ' + res);
+  });
+```
+
+### Leads Lists
+Save and manage all your leads lists in Hunter.
+
+```javascript
+const API_KEY = 'YOUR_API_KEY';
+const hunterio = new Hunterio(API_KEY);
+
+hunterio.listLeadsLists()
+  .then((res) => {
+    console.log('Leads Lists: ' + res);
+  });
+```

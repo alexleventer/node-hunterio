@@ -1,8 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { Hunterio, EmailCountRequest, EmailCountResponse, FindEmailRequest } from '../src';
-import {VerifyEmailRequest} from '../src/Hunterio';
-
+import { VerifyEmailRequest } from '../src/Hunterio';
 
 describe('Hunterio', () => {
   // @ts-ignore
@@ -102,6 +101,22 @@ describe('Hunterio', () => {
       expect(results.data).to.have.property('personal_emails');
       expect(results.data).to.have.property('generic_emails');
       expect(results.data).to.have.property('department');
+    });
+  });
+  describe('Leads Lists', () => {
+    const hunterio = new Hunterio(API_KEY);
+    it('should list leads lists', async () => {
+      const results = await hunterio.listLeadsLists();
+      expect(results).to.have.property('data');
+      expect(results.data).to.have.property('leads_lists');
+    });
+  });
+  describe('Leads', () => {
+    const hunterio = new Hunterio(API_KEY);
+    it('should list leads', async () => {
+      const results = await hunterio.listLeads();
+      expect(results).to.have.property('data');
+      expect(results.data).to.have.property('leads');
     });
   });
 });

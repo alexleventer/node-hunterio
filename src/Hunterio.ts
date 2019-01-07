@@ -8,7 +8,7 @@ export class Hunterio {
     if (!apiKey) {
       throw new Error('API key is required');
     }
-    this.apiBase = 'https://api.hunter.io/v2/';
+    this.apiBase = 'https://api.hunter.io/v2';
     this.apiKey = apiKey;
     this.axios = axios;
   }
@@ -17,6 +17,7 @@ export class Hunterio {
       body.params.api_key = this.apiKey;
       return await this.axios.get(url, body);
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
@@ -51,6 +52,14 @@ export class Hunterio {
   }
   async getAccountInformation(): Promise<AccountInformationResponse> {
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/account`);
+    return results.data;
+  }
+  async listLeadsLists(): Promise<ListLeadsListsResponse> {
+    const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/leads_lists`);
+    return results.data;
+  }
+  async listLeads(): Promise<ListLeadResponse> {
+    const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/leads`);
     return results.data;
   }
 }
@@ -206,4 +215,57 @@ export interface EmailCountResponse {
       type: string;
     },
   };
+}
+
+export interface ListLeadsListsResponse {
+  data: {
+    leads_lists: LeadsList[],
+  };
+  meta: {
+    total: number;
+  };
+}
+
+export interface LeadsList {
+  id: number;
+  name: string;
+  leads_count: number;
+  team_id: number;
+}
+
+export interface ListLeadResponse {
+  data: {
+    leads: Lead[];
+  };
+  meta: {
+    count: number;
+    total: number;
+    params: {
+      limit: number;
+      offset: number;
+    }
+  };
+}
+
+export interface Lead {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  position: string;
+  company: string;
+  company_industry: string;
+  company_size: number;
+  confidence_score: string;
+  website: string;
+  country_code: string;
+  source: string;
+  linkedin_url: string;
+  phone_number: string;
+  twitter: string;
+  sync_status: string;
+  notes: string;
+  sending_status: string;
+  last_activity_at: string;
+  leads_list: LeadsList;
 }
