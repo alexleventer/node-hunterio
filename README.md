@@ -15,7 +15,13 @@ Get every email address found on the internet using a given domain name, with so
 ```javascript
 const API_KEY = 'YOUR_API_KEY';
 const hunterio = new Hunterio(API_KEY);
-hunterio.searchDomain('hunter.io')
+
+const searchDomainRequest = {
+  domain: 'hunter.io',
+  type: 'generic'
+};
+
+hunterio.searchDomain(searchDomainRequest)
   .then((res) => {
     console.log('Domain Information: ' + res);
   });
