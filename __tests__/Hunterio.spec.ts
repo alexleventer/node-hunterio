@@ -51,6 +51,24 @@ describe('Hunterio', () => {
       expect(results.meta).to.have.property('offset');
     });
   });
+  describe('Domain Search with object params', () => {
+    it('should search domain', async () => {
+      const hunterio = new Hunterio(API_KEY);
+      const results = await hunterio.searchDomain({ domain: 'hunter.io' });
+      expect(results).to.have.property('data');
+      expect(results.data).to.have.property('domain');
+      expect(results.data).to.have.property('disposable');
+      expect(results.data).to.have.property('webmail');
+      expect(results.data).to.have.property('pattern');
+      expect(results.data).to.have.property('organization');
+      expect(results.data).to.have.property('emails');
+      expect(results.data.emails).to.have.length.greaterThan(0);
+      expect(results).to.have.property('meta');
+      expect(results.meta).to.have.property('results');
+      expect(results.meta).to.have.property('limit');
+      expect(results.meta).to.have.property('offset');
+    });
+  });
   describe('Email Finder', () => {
     it('should search domain', async () => {
       const hunterio = new Hunterio(API_KEY);

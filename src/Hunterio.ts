@@ -21,14 +21,20 @@ export class Hunterio {
       throw error;
     }
   }
-  async searchDomain(domain: string): Promise<DomainSearchResponse> {
-    if (!domain) {
-      throw new Error('Missing required parameter, domain');
+  async searchDomain(domainRequest: DomainSearchRequest | string): Promise<DomainSearchResponse> {
+    if (!domainRequest) {
+      throw new Error("Missing required parameter, domain");
+    }
+    if (typeof domainRequest === 'string') {
+      domainRequest = {
+        domain: domainRequest
+      }
+    }
+    if (!domainRequest.domain && !domainRequest.company) {
+      throw new Error('Missing required parameter, domain or company');
     }
     const results:AxiosResponse = await this.makeRequest(`${this.apiBase}/domain-search`, {
-      params: {
-        domain,
-      },
+      params: domainRequest,
     });
     return results.data;
   }
@@ -78,6 +84,16 @@ export interface AccountInformationResponse {
       available: number;
     }
   };
+}
+
+export interface DomainSearchRequest {
+  domain?: string;
+  company?: string;
+  limit?: number;
+  offset?: number;
+  type?: "personal" | "generic";
+  seniority?: string; // junior, senior or executive
+  department?: string; // executive, it, finance, management, sales, legal, support, hr, marketing or communication
 }
 
 export interface DomainSearchResponse {
