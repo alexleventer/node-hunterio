@@ -1,5 +1,5 @@
 {
-  "name": "@crescent/node-hunterio",
+  "name": "node-hunterio",
   "version": "1.6.0",
   "description": "Node.js wrapper for the Hunter.io API",
   "main": "./dist/index.js",
